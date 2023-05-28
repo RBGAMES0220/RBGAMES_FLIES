@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
 
     public Transform target; // 目標跟隨的物體
-    public float smoothing = 5f; // 攝影機跟隨的平滑度
+    public float smoothing = 20f; // 攝影機跟隨的平滑度
 
     private Vector3 offset; // 攝影機與目標的位置偏移
 
