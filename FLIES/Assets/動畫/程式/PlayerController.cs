@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f; // 玩家移動速度
     public float jumpForce = 10f; // 跳躍力度
     public int maxJumps = 2; // 最大跳躍次數
+    public Collider2D coll;
     public Animator anim;
     public LayerMask ground;
 
@@ -59,19 +60,34 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             jumpCount = 0;
+            
         }
     }
 
     void SwitchAnim()
     {
+        anim.SetBool("idle", false);
+
         if (anim.GetBool("jumping"))
         {
             if(rb.velocity.y < 0)
             {
                 anim.SetBool("jumping", false);
-                anim.SetBool("fallin", true);
+                anim.SetBool("falling", true);
+            }
+
+            else if (rb.velocity.y > 0)
+            {
+                anim.SetBool("jumping", true);
+                anim.SetBool("falling", false);
             }
         }
+        else if (coll.IsTouchingLayers(ground))
+        {
+            anim.SetBool("falling", false);
+            anim.SetBool("idle", true);
+        }         
+
     }
 }
 
