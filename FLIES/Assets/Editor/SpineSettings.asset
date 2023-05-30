@@ -24,8 +24,8 @@ MonoBehaviour:
   fixPrefabOverrideViaMeshFilter: 0
   removePrefabPreviewMeshes: 0
   blendModeMaterialMultiply: {fileID: 0}
-  blendModeMaterialScreen: {fileID: 0}
-  blendModeMaterialAdditive: {fileID: 2100000, guid: 111106e0923671b45908e75d89ca3edc, type: 2}
+  blendModeMaterialScreen: {fileID: 2100000, guid: b66cf7a186d13054989b33a5c90044e4, type: 2}
+  blendModeMaterialAdditive: {fileID: 2100000, guid: b66cf7a186d13054989b33a5c90044e4, type: 2}
   atlasTxtImportWarning: 1
   textureImporterWarning: 1
   componentMaterialWarning: 1
