@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Enemy : MonoBehaviour
 {
     public float patrolSpeed = 5f; // 巡邏時的移動速度
@@ -13,6 +12,7 @@ public class Enemy : MonoBehaviour
     private bool isFacingRight = true; // 是否面向右邊
     private Transform target; // 玩家的參考點或物件
     public float threshold = 0.1f; // 到達目標點的距離閾值
+    public float detectionRadius = 5f; // 偵測半徑
 
     private enum EnemyState
     {
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         Vector3 direction = (currentWaypoint.position - transform.position).normalized;
 
         // 移動到目標點
-        rb.velocity = new Vector2(direction.x * patrolSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * patrolSpeed, direction.y * patrolSpeed);
 
         // 根據移動方向來更新面朝方向
         if (direction.x > 0 && !isFacingRight)
@@ -79,11 +79,21 @@ public class Enemy : MonoBehaviour
 
     private void Chase()
     {
+        // 判斷敵人與玩家的距離
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+        // 判斷是否超出偵測範圍
+        if (distanceToTarget > detectionRadius)
+        {
+            currentState = EnemyState.Patrol; // 超出範圍則切換回巡邏狀態
+            return;
+        }
+
         // 判斷敵人與玩家的相對位置，決定移動方向
         Vector3 direction = (target.position - transform.position).normalized;
 
         // 移動向玩家位置
-        rb.velocity = new Vector2(direction.x * chaseSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(direction.x * chaseSpeed, direction.y * chaseSpeed);
 
         // 根據移動方向來更新面朝方向
         if (direction.x > 0 && !isFacingRight)
@@ -94,19 +104,13 @@ public class Enemy : MonoBehaviour
         {
             Flip(); // 翻轉面朝方向
         }
-
-        // 檢查是否需要切換回巡邏狀態
-        if (!ShouldChase())
-        {
-            currentState = EnemyState.Patrol;
-        }
     }
 
     private bool ShouldChase()
     {
         // 檢查敵人與玩家之間的距離是否小於某個閾值，如果是則切換到追逐狀態
         float distanceToTarget = Vector3.Distance(transform.position, target.position);
-        return distanceToTarget < threshold;
+        return distanceToTarget < detectionRadius;
     }
 
     private void Flip()
@@ -120,6 +124,10 @@ public class Enemy : MonoBehaviour
         transform.localScale = scale;
     }
 }
+
+
+
+
 
 
 
