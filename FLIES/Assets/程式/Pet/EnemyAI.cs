@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     public float maxHealth = 100f; // 最大生命值
     private float currentHealth; // 當前生命值
