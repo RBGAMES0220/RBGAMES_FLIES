@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8165958358686736675}
   - component: {fileID: 8165958358686736672}
   - component: {fileID: 8165958358686736678}
-  - component: {fileID: 8165958358686736677}
   - component: {fileID: 8165958358686736679}
   - component: {fileID: 8165958358686736676}
   - component: {fileID: 8165958358686736683}
@@ -134,20 +133,6 @@ MonoBehaviour:
   detectionRadius: 16.2
   detectionInterval: 0.1
   attackDistance: 2
---- !u!114 &8165958358686736677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8165958358686736668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d277820b4b65cd746897f18b574b2108, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
 --- !u!95 &8165958358686736679
 Animator:
   serializedVersion: 4
